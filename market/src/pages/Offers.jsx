@@ -8,4 +8,4 @@ function Offers() {
   );
 }
 
-export default Explore;
+export default Offers;
