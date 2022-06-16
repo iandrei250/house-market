@@ -9,6 +9,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { db } from "../firebase.config";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
