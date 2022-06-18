@@ -1,9 +1,11 @@
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import React from "react";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { db } from "../firebase.config";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
+import { refEqual } from "firebase/firestore";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
