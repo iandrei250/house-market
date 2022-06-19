@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
@@ -16,7 +16,6 @@ import { db } from "../firebase.config";
 
 //FUNCTION
 function CreateListing() {
-  const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
@@ -48,7 +47,6 @@ function CreateListing() {
 
   const auth = getAuth();
   const navigate = useNavigate();
-  const isMounted = useRef(true);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -179,18 +177,12 @@ function CreateListing() {
   };
 
   useEffect(() => {
-    if (isMounted) {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setFormData({ ...formData, userRef: user.uid });
-        } else navigate("/sign-in");
-      });
-    }
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, [isMounted]);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setFormData({ ...formData, userRef: user.uid });
+      } else navigate("/sign-in");
+    });
+  }, []);
 
   if (loading) {
     return <Spinner />;
