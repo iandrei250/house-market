@@ -135,10 +135,9 @@ function CreateListing() {
       ...formData,
       imgUrls,
       geolocation,
+      location: address,
       timestamp: serverTimestamp(),
     };
-
-    formDataCopy.location = address;
 
     delete formDataCopy.images;
     delete formDataCopy.address;
